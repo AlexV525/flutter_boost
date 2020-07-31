@@ -129,12 +129,7 @@ public class BoostFlutterActivity extends AppCompatActivity
 
     private FlutterActivityAndFragmentDelegate delegate;
 
-    @NonNull
     private LifecycleRegistry lifecycle;
-
-    public BoostFlutterActivity() {
-        lifecycle = new LifecycleRegistry(this);
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -357,6 +352,9 @@ public class BoostFlutterActivity extends AppCompatActivity
     @Override
     @NonNull
     public Lifecycle getLifecycle() {
+        if (lifecycle == null) {
+            lifecycle = new LifecycleRegistry(this);
+        }
         return lifecycle;
     }
 
