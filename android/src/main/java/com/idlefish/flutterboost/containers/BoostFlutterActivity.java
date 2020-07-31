@@ -1,7 +1,10 @@
 package com.idlefish.flutterboost.containers;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
@@ -34,7 +37,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BoostFlutterActivity extends Activity
+public class BoostFlutterActivity extends AppCompatActivity
         implements FlutterActivityAndFragmentDelegate.Host,
         LifecycleOwner {
 
@@ -188,7 +191,7 @@ public class BoostFlutterActivity extends Activity
     @SuppressWarnings("deprecation")
     private Drawable getSplashScreenFromManifest() {
         try {
-            ActivityInfo activityInfo = getPackageManager().getActivityInfo(
+            @SuppressLint("WrongConstant") ActivityInfo activityInfo = getPackageManager().getActivityInfo(
                     getComponentName(),
                     PackageManager.GET_META_DATA | PackageManager.GET_ACTIVITIES
             );
@@ -289,6 +292,7 @@ public class BoostFlutterActivity extends Activity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         delegate.onActivityResult(requestCode, resultCode, data);
     }
 
